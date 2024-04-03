@@ -1,4 +1,5 @@
 import { Outlet } from 'react-router-dom';
+import { Footer } from '../footer';
 import { Header } from '../header';
 
 export const AuthLayout = () => {
@@ -8,6 +9,7 @@ export const AuthLayout = () => {
       <main className='bg-zinc-100 flex'>
         <Outlet />
       </main>
+      <Footer />
     </>
   );
 };
