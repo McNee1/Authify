@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router-dom';
-import { Footer } from '../footer';
-import { Header } from '../header';
+
+import { Footer } from '@/widgets/footer';
+import { Header } from '@/widgets/header';
 
 export const AuthLayout = () => {
   return (
