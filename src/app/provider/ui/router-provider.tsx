@@ -1,4 +1,5 @@
 import { createBrowserRouter } from 'react-router-dom';
+import { PATH_ROUTER } from '../lib/path';
 
 import { LoginPage } from '@/pages/login-page';
 import { RegistrationPage } from '@/pages/registration-page';
@@ -11,11 +12,11 @@ export const useRouter = () => {
 
       children: [
         {
-          path: 'login',
+          path: PATH_ROUTER.LOGIN,
           element: <LoginPage />,
         },
         {
-          path: 'registration',
+          path: PATH_ROUTER.REGISTRATION,
           element: <RegistrationPage />,
         },
       ],

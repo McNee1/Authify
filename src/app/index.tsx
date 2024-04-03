@@ -1,6 +1,6 @@
 import { StrictMode } from 'react';
 import { RouterProvider } from 'react-router-dom';
-import { useRouter } from './router-provider';
+import { useRouter } from './provider';
 
 export const Provider = () => {
   const router = useRouter();
