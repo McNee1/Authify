@@ -1,20 +1,11 @@
-// import { sessionModel } from '@/entities/session';
-// import { HeaderButton } from '@/features/session/header-button';
-// import { Avatar } from '@/shared/ui/avatar/Avatar';
-// import { Link } from 'react-router-dom';
-
 export const Header = () => {
-  // const isAuth = sessionModel.useAuth();
-
-  // const { name: userName, photoURL: userImg } = sessionModel.useCurrentUser();
-
   return (
     <header className='bg-white'>
       <div className='container max-w-7xl border-b border-neutral-200'>
-        <div className='flex justify-between items-center py-3'>
+        <div className='flex items-center justify-between py-3'>
           <div className='flex items-center'>
             <div className='mr-[20px]'>
-              <a>
+              <a href='/'>
                 <svg
                   enableBackground='new 0 0 715.412 283.951'
                   viewBox='0 0 715.412 283.951'
@@ -64,7 +55,7 @@ export const Header = () => {
                 </svg>
               </a>
             </div>
-            <span className='w-[225px] hidden sm:block'>
+            <span className='hidden w-[225px] sm:block'>
               Lorem ipsum dolor sit amet consectetur.
             </span>
           </div>

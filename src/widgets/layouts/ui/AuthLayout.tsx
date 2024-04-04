@@ -7,7 +7,7 @@ export const AuthLayout = () => {
   return (
     <>
       <Header />
-      <main className='bg-zinc-100 flex'>
+      <main className='flex bg-zinc-100'>
         <Outlet />
       </main>
       <Footer />

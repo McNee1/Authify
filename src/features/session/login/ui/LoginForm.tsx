@@ -117,7 +117,7 @@ export const LoginForm = () => {
       </div>
 
       <button
-        className='disabled:bg-neutral-300 w-full disabled:text-white bg-black text-white font-medium rounded-md py-[13px]'
+        className='w-full rounded-md bg-black py-[13px] font-medium text-white disabled:bg-neutral-300 disabled:text-white'
         type='submit'
       >
         Вход

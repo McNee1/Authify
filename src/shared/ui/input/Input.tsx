@@ -14,7 +14,7 @@ export const CustomInput = forwardRef<HTMLInputElement, CustomInputProps>(
       <>
         <div className={['relative', errors ? '' : gap].join(' ')}>
           {icon && (
-            <div className='absolute inset-y-0 left-0 flex items-center pl-5 pointer-events-none'>
+            <div className='pointer-events-none absolute inset-y-0 left-0 flex items-center pl-5'>
               {icon}
             </div>
           )}
@@ -22,14 +22,14 @@ export const CustomInput = forwardRef<HTMLInputElement, CustomInputProps>(
             ref={ref}
             {...rest}
             className={[
-              'p-3 border placeholder:text-zinc-500 text-black text-base rounded-md w-full focus:outline-none ',
+              'w-full rounded-md border p-3 text-base text-black placeholder:text-zinc-500 focus:outline-none ',
               icon && 'pl-14',
               className,
             ].join(' ')}
           />
         </div>
         {errors && (
-          <div className='text-red-600 text-sm font-medium mb-0.5'>{errors.message}</div>
+          <div className='mb-0.5 text-sm font-medium text-red-600'>{errors.message}</div>
         )}
       </>
     );
