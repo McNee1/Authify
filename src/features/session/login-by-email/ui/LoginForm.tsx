@@ -1,6 +1,4 @@
-import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import * as z from 'zod';
+import { useLogIn } from '../model/hook/useLogIn';
 
 import { EmailIcon } from '@/shared/assets/icons/EmailIcon';
 import { LockIcon } from '@/shared/assets/icons/LockIcon';
@@ -15,39 +13,8 @@ import {
 import { applyClass } from '@/shared/lib/apply-class';
 import { CustomInput } from '@/shared/ui/input/Input';
 
-const schema = z.object({
-  email: z
-    .string()
-    .email()
-    .min(7, { message: 'Email must contain at least 7 character(s)' })
-    .max(20)
-    .trim(),
-  password: z
-    .string()
-    .min(5, { message: 'Password must contain at least 5 character(s)' })
-    .max(30)
-    .trim(),
-});
-
-type Schema = z.infer<typeof schema>;
-
 export const LoginForm = () => {
-  const {
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<Schema>({
-    resolver: zodResolver(schema),
-    mode: 'all',
-    defaultValues: {
-      email: '',
-      password: '',
-    },
-  });
-
-  const onSubmit: SubmitHandler<Schema> = (data): void => {
-    console.log(data, errors);
-  };
+  const { Controller, control, errors, handleSubmit, onSubmit } = useLogIn();
 
   return (
     <form onSubmit={(event) => void handleSubmit(onSubmit)(event)}>
