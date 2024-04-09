@@ -1,5 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
-import { PATH_ROUTER } from '../lib/path';
+import { PATH_ROUTER } from '../../lib/path';
+import { PrivateRoute } from '../private-route/PrivateRoute';
 
 import { LoginPage } from '@/pages/login-page';
 import { RegistrationPage } from '@/pages/registration-page';
@@ -24,7 +25,11 @@ export const useRouter = () => {
       ],
     },
     {
-      element: <MainLayout />,
+      element: (
+        <PrivateRoute redirect='login'>
+          <MainLayout />
+        </PrivateRoute>
+      ),
       children: [
         {
           path: '/',

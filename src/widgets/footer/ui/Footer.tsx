@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 
-import { PATH_ROUTER } from '@/app/provider';
+import { PATH_ROUTER } from '@/app/providers/router';
 
 const MAP: Record<string, string> = {
   REGISTRATION: 'Уже есть аккаунт? Войти',

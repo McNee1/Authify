@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { schema, type SchemaType } from '../schema/zod';
 
-import { PATH_ROUTER } from '@/app/provider';
+import { PATH_ROUTER } from '@/app/providers/router';
 import { AuthService } from '@/shared/services/auth';
 import { UsersService } from '@/shared/services/users';
 
