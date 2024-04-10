@@ -1,4 +1,23 @@
+import { useEffect } from 'react';
+
+import { useAppSelector } from '@/app/providers/store-provider';
+import { selectAuth } from '@/entities/auth';
+import { UsersService } from '@/shared/services/users';
+
+const usersService = new UsersService();
+
 export const UsersPage = () => {
+  const token = useAppSelector(selectAuth)?.idToken;
+
+  useEffect(() => {
+    const getUsers = async () => {
+      if (token) {
+        const { data } = await usersService.getAllUsers({ params: { idToken: token } });
+        console.log(data);
+      }
+    };
+    void getUsers();
+  });
   return (
     <>
       <div className='container'>

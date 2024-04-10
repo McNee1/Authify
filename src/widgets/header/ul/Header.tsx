@@ -1,8 +1,12 @@
 import { useAppSelector } from '@/app/providers/store-provider';
-import { selectUserData } from '@/entities/user/model/selectors/select-user-data';
+import { selectIsAuth } from '@/entities/auth';
+import { selectUserImg, selectUserName } from '@/entities/user';
+import { Avatar } from '@/shared/ui/avatar/Avatar';
 
 export const Header = () => {
-  const userName = useAppSelector(selectUserData)?.name;
+  const userImg = useAppSelector(selectUserImg);
+  const userName = useAppSelector(selectUserName);
+  const isAuth = useAppSelector(selectIsAuth);
   return (
     <header className='bg-white'>
       <div className='container max-w-7xl border-b border-neutral-200'>
@@ -64,20 +68,18 @@ export const Header = () => {
             </span>
           </div>
 
-          {/* {isAuth ? ( */}
-          <>
-            <div className='ml-auto mr-5'>{userName}</div>
-            {/* <a>
-              <Avatar
-                userName={userName}
-                userImg={userImg}
-                size='sm'
-              />
-            </a> */}
-          </>
-          {/* ) : (
-            <HeaderButton />
-          )} */}
+          {isAuth && (
+            <>
+              <div className='ml-auto mr-5'>{userName}</div>
+              <a href='/'>
+                <Avatar
+                  userName={userName}
+                  userImg={userImg}
+                  size='sm'
+                />
+              </a>
+            </>
+          )}
         </div>
       </div>
     </header>
