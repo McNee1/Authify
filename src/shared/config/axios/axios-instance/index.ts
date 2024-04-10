@@ -29,14 +29,9 @@ authAxios.interceptors.response.use(
   function (response) {
     if (response.status === 200) {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-      const idToken = response.data?.idToken;
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-      const uId = response.data?.localId;
-
       // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-      idToken && localStorage.setItem('idToken', idToken);
       // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-      uId && localStorage.setItem('uId', uId);
     }
 
     console.log(response);

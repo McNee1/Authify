@@ -1,8 +1,10 @@
-export interface UserSchema {
+export interface User {
   description?: string;
   email: string;
-  idToken: string;
   name: string;
-  photoURL?: string;
-  uId: string;
+  photoURL?: string | null;
+}
+
+export interface UserSchema {
+  userData: User | null;
 }

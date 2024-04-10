@@ -1,5 +1,5 @@
 export interface Auth {
-  accessToken: string;
+  idToken: string;
   refreshToken: string;
   uId: string;
 }

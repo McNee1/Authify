@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { StateSchema } from './state-schema';
 
-import { userReducer } from '@/entities/auth';
+import { authReducer } from '@/entities/auth';
+import { userReducer } from '@/entities/user';
 
 export const store = configureStore<StateSchema>({
   reducer: {
-    auth: userReducer,
+    auth: authReducer,
+    user: userReducer,
   },
 });
 

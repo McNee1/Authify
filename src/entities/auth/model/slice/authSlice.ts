@@ -9,7 +9,7 @@ const initialState: AuthSchema = {
   authData: LC.get('session') as Auth | null,
 };
 
-export const userSlice = createSlice({
+export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
@@ -17,12 +17,12 @@ export const userSlice = createSlice({
       state.authData = action.payload.authData;
       LC.set('session', { ...action.payload.authData });
     },
-    logoutUser: (state) => {
+    logout: (state) => {
       state.authData = null;
       LC.remove('session');
     },
   },
 });
 
-export const { actions: userAction } = userSlice;
-export const { reducer: userReducer } = userSlice;
+export const { actions: authAction } = authSlice;
+export const { reducer: authReducer } = authSlice;

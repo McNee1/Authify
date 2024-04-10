@@ -5,7 +5,8 @@ import { schema, type SchemaType } from '../schema/zod';
 
 import { PATH_ROUTER } from '@/app/providers/router';
 import { useAppDispatch } from '@/app/providers/store-provider';
-import { userAction } from '@/entities/auth';
+import { authAction } from '@/entities/auth';
+import { userAction } from '@/entities/user';
 import { AuthService } from '@/shared/services/auth';
 
 const authService = new AuthService();
@@ -37,11 +38,21 @@ export const useLogIn = () => {
       });
       if (status === 200 && data.idToken) {
         dispatch(
-          userAction.setAuth({
+          authAction.setAuth({
             authData: {
-              accessToken: data.idToken,
+              idToken: data.idToken,
               uId: data.localId,
               refreshToken: data.refreshToken,
+            },
+          })
+        );
+        console.log(data);
+        dispatch(
+          userAction.setUser({
+            userData: {
+              email: data.email,
+              name: data.displayName,
+              photoURL: data.profilePicture ?? null,
             },
           })
         );

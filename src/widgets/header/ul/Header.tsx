@@ -1,4 +1,8 @@
+import { useAppSelector } from '@/app/providers/store-provider';
+import { selectUserData } from '@/entities/user/model/selectors/select-user-data';
+
 export const Header = () => {
+  const userName = useAppSelector(selectUserData)?.name;
   return (
     <header className='bg-white'>
       <div className='container max-w-7xl border-b border-neutral-200'>
@@ -62,7 +66,7 @@ export const Header = () => {
 
           {/* {isAuth ? ( */}
           <>
-            <div className='ml-auto mr-5'>{'userName'}</div>
+            <div className='ml-auto mr-5'>{userName}</div>
             {/* <a>
               <Avatar
                 userName={userName}
