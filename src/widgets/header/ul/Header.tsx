@@ -1,12 +1,29 @@
+import { useLocation, useNavigate } from 'react-router-dom';
+
+import { PATH_ROUTER } from '@/app/providers/router';
 import { useAppSelector } from '@/app/providers/store-provider';
 import { selectIsAuth } from '@/entities/auth';
 import { selectUserImg, selectUserName } from '@/entities/user';
 import { Avatar } from '@/shared/ui/avatar/Avatar';
+import { Button } from '@/shared/ui/button/Button';
 
 export const Header = () => {
   const userImg = useAppSelector(selectUserImg);
   const userName = useAppSelector(selectUserName);
   const isAuth = useAppSelector(selectIsAuth);
+
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleEnter = () => {
+    console.log(location);
+    if (location.pathname.slice(1) !== PATH_ROUTER.LOGIN) {
+      navigate(PATH_ROUTER.LOGIN);
+    } else {
+      navigate(PATH_ROUTER.REGISTRATION);
+    }
+  };
+
   return (
     <header className='bg-white'>
       <div className='container max-w-7xl border-b border-neutral-200'>
@@ -68,7 +85,7 @@ export const Header = () => {
             </span>
           </div>
 
-          {isAuth && (
+          {isAuth ? (
             <>
               <div className='ml-auto mr-5'>{userName}</div>
               <a href='/'>
@@ -79,6 +96,13 @@ export const Header = () => {
                 />
               </a>
             </>
+          ) : (
+            <Button
+              className='rounded-md border border-solid border-neutral-300 px-8 py-[7px] font-medium'
+              onClick={handleEnter}
+            >
+              {location.pathname.slice(1) !== PATH_ROUTER.LOGIN ? 'Войти' : 'Создать'}
+            </Button>
           )}
         </div>
       </div>

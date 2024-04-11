@@ -3,7 +3,7 @@ import { clsx } from 'clsx/lite';
 interface AvatarProps {
   className?: string;
   isLoading?: boolean;
-  size: 'sm' | 'md' | 'lg';
+  size?: 'sm' | 'md' | 'lg';
   userImg: string | null;
   userName: string | null;
 }

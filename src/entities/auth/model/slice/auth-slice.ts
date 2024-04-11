@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Auth, AuthSchema } from '../types/auth';
+import { Auth, AuthSchema } from '../types/auth.type';
 
 import { localStorageManager } from '@/shared/lib/local-storage-manager';
 
@@ -9,7 +9,7 @@ const initialState: AuthSchema = {
   authData: LC.get('session') as Auth | null,
 };
 
-export const authSlice = createSlice({
+const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
