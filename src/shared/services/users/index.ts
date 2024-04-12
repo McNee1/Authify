@@ -11,7 +11,6 @@ export class UsersService {
     params,
     config,
   }: AxiosRequestConfig<Pick<UserRequest, 'idToken'>>) {
-    // throw Error('my BAD');
     return baseAxios.get<Record<string, User>>(
       `/users.json?auth=${params.idToken}`,
       config

@@ -2,9 +2,13 @@ import { useEffect } from 'react';
 
 import { useAppDispatch, useAppSelector } from '@/app/providers/store-provider';
 import { selectAuth } from '@/entities/auth';
+import { selectUsersError } from '@/entities/users-list/model/selectors/select-users-error';
 import { selectUsersList } from '@/entities/users-list/model/selectors/select-users-list';
+import { selectUsersStatus } from '@/entities/users-list/model/selectors/select-users-status';
 import { getAllUsers } from '@/entities/users-list/model/service/get-all-users';
 import { Avatar } from '@/shared/ui/avatar/Avatar';
+import { ErrorMessage } from '@/shared/ui/error-message/ErrorMessage';
+import { Spinner } from '@/shared/ui/spinner/Spinner';
 
 export const UsersPage = () => {
   const token = useAppSelector(selectAuth)?.idToken;
@@ -12,16 +16,25 @@ export const UsersPage = () => {
   const dispatch = useAppDispatch();
 
   const usersList = useAppSelector(selectUsersList);
+  const status = useAppSelector(selectUsersStatus);
+  const error = useAppSelector(selectUsersError);
 
   useEffect(() => {
-    const getUsers = async () => {
+    const getUsers = () => {
       if (token) {
-        const a = await dispatch(getAllUsers({ idToken: token }));
-        console.log(a);
+        void dispatch(getAllUsers({ idToken: token }));
       }
     };
-    void getUsers();
+    getUsers();
   }, [dispatch, token]);
+
+  if (status === 'pending' || status === 'idle') {
+    return <Spinner />;
+  }
+  if (error) {
+    return <ErrorMessage error={error} />;
+  }
+
   return (
     <>
       <div className='container'>

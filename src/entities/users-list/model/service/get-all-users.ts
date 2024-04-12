@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { isAxiosError } from 'axios';
+import { AxiosError, isAxiosError } from 'axios';
 
 import { User } from '@/entities/user/model/types/user.type';
 import { UsersService } from '@/shared/services/users';
@@ -16,12 +16,15 @@ export const getAllUsers = createAsyncThunk<
       params: { idToken: params.idToken },
     });
     const formattedData = Object.keys(data).map((user) => data[user]);
+
     return formattedData;
-  } catch (error) {
+  } catch (err) {
+    const error = err as Error | AxiosError;
+
     if (isAxiosError(error)) {
       return thunkApi.rejectWithValue(error.message);
     } else {
-      return thunkApi.rejectWithValue('getAllUsers error');
+      return thunkApi.rejectWithValue(error.message);
     }
   }
 });
