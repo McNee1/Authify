@@ -3,6 +3,7 @@ import { PATH_ROUTER } from '../../lib/path';
 import { PrivateRoute } from '../private-route/PrivateRoute';
 
 import { LoginPage } from '@/pages/login-page';
+import { ProfilePage } from '@/pages/profile-page';
 import { RegistrationPage } from '@/pages/registration-page';
 import { UsersPage } from '@/pages/users-page';
 import { AuthLayout } from '@/widgets/layouts/auth-layout';
@@ -34,6 +35,10 @@ export const useRouter = () => {
         {
           path: '/',
           element: <UsersPage />,
+        },
+        {
+          path: PATH_ROUTER.PROFILE,
+          element: <ProfilePage />,
         },
       ],
     },

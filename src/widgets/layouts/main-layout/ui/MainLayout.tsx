@@ -6,7 +6,7 @@ export const MainLayout = () => {
   return (
     <>
       <Header />
-      <main className='flex bg-zinc-100'>
+      <main>
         <Outlet />
       </main>
     </>

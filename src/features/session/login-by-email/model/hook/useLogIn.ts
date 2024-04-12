@@ -50,7 +50,6 @@ export const useLogIn = () => {
         dispatch(
           userAction.setUser({
             userData: {
-              email: data.email,
               name: data.displayName,
               photoURL: data.profilePicture ?? null,
             },
