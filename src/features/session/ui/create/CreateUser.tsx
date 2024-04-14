@@ -1,4 +1,4 @@
-import { useCreateUser } from '../model/hook/useCreate';
+import { useCreateUser } from '../../model/hooks/useCreate';
 
 import { EmailIcon } from '@/shared/assets/icons/EmailIcon';
 import { LockIcon } from '@/shared/assets/icons/LockIcon';

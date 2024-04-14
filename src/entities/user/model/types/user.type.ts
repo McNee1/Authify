@@ -1,8 +1,8 @@
 export interface User {
   description?: string;
-  email?: string;
+  email: string;
   name: string;
-  photoURL?: string | null;
+  photoURL: string | null;
 }
 
 export interface UserSchema {

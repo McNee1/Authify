@@ -1,4 +1,4 @@
-import { CreateUser } from '@/features/session/create';
+import { CreateUser } from '@/features/session';
 
 export const RegistrationPage = () => {
   return (

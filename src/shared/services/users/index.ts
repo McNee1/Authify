@@ -1,7 +1,7 @@
 import { User } from '@/entities/user';
 import { baseAxios } from '@/shared/config/axios';
 
-export interface UserRequest extends User {
+export interface UserRequest extends Omit<User, 'photoURL'> {
   idToken: string;
   uId: string;
 }

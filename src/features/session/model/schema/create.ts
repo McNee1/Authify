@@ -1,6 +1,11 @@
 import * as z from 'zod';
 
-export const schema = z.object({
+export const createSchema = z.object({
+  userName: z
+    .string()
+    .min(4, { message: 'Name must contain at least 5 character(s)' })
+    .max(20)
+    .trim(),
   email: z
     .string()
     .email()
@@ -14,4 +19,4 @@ export const schema = z.object({
     .trim(),
 });
 
-export type SchemaType = z.infer<typeof schema>;
+export type CreateSchemaType = z.infer<typeof createSchema>;

@@ -15,7 +15,6 @@ const userSlice = createSlice({
   reducers: {
     setUser: (state, action: PayloadAction<UserSchema>) => {
       state.userData = action.payload.userData;
-
       LC.set('user', {
         name: action.payload.userData?.name,
         photoURL: action.payload.userData?.photoURL,

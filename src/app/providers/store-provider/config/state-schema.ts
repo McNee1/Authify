@@ -1,9 +1,9 @@
-import { AuthSchema } from '@/entities/auth';
 import { UserSchema } from '@/entities/user';
 import { UsersListSchema } from '@/entities/users-list';
+import { SessionSchema } from '@/features/session';
 
 export interface StateSchema {
-  auth: AuthSchema;
+  session: SessionSchema;
   user: UserSchema;
   users: UsersListSchema;
 }

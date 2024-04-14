@@ -1,16 +1,16 @@
 import { useEffect } from 'react';
 
 import { useAppDispatch, useAppSelector } from '@/app/providers/store-provider';
-import { selectAuth } from '@/entities/auth';
 import {
   selectUsersError,
   selectUsersList,
   selectUsersStatus,
 } from '@/entities/users-list';
 import { getAllUsers } from '@/entities/users-list/model/service/get-all-users';
+import { selectAccessToken } from '@/features/session';
 
 export const useUsers = () => {
-  const token = useAppSelector(selectAuth)?.idToken;
+  const accessToken = useAppSelector(selectAccessToken);
 
   const dispatch = useAppDispatch();
 
@@ -20,12 +20,12 @@ export const useUsers = () => {
 
   useEffect(() => {
     const getUsers = () => {
-      if (token) {
-        void dispatch(getAllUsers({ idToken: token }));
+      if (accessToken) {
+        void dispatch(getAllUsers({ idToken: accessToken }));
       }
     };
     getUsers();
-  }, [dispatch, token]);
+  }, [dispatch, accessToken]);
 
   return { usersList, status, error };
 };

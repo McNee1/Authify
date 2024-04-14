@@ -1,5 +1,7 @@
-import { useLogIn } from '../model/hook/useLogIn';
+import { useLogIn } from '../../model/hooks/useLogIn';
+import { selectSessionStatus } from '../../model/selectors/select-session-status';
 
+import { useAppSelector } from '@/app/providers/store-provider';
 import { EmailIcon } from '@/shared/assets/icons/EmailIcon';
 import { LockIcon } from '@/shared/assets/icons/LockIcon';
 import {
@@ -15,6 +17,8 @@ import { CustomInput } from '@/shared/ui/input/Input';
 
 export const LoginForm = () => {
   const { Controller, control, errors, handleSubmit, onSubmit } = useLogIn();
+
+  const status = useAppSelector(selectSessionStatus);
 
   return (
     <form onSubmit={(event) => void handleSubmit(onSubmit)(event)}>
@@ -84,7 +88,8 @@ export const LoginForm = () => {
       </div>
 
       <button
-        className='w-full rounded-md bg-black py-[13px] font-medium text-white disabled:bg-neutral-300 disabled:text-white'
+        className='w-full rounded-md bg-black py-[13px] font-medium text-white disabled:bg-neutral-300'
+        disabled={status === 'pending'}
         type='submit'
       >
         Вход

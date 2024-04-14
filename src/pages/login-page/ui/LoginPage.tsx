@@ -1,4 +1,4 @@
-import { LoginForm } from '@/features/session/login-by-email';
+import { LoginForm } from '@/features/session';
 
 export const LoginPage = () => {
   return (

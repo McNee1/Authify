@@ -2,8 +2,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 import { PATH_ROUTER } from '@/app/providers/router';
 import { useAppSelector } from '@/app/providers/store-provider';
-import { selectIsAuth } from '@/entities/auth';
 import { selectUserImg, selectUserName } from '@/entities/user';
+import { selectIsAuth } from '@/features/session';
 import { Avatar } from '@/shared/ui/avatar/Avatar';
 import { Button } from '@/shared/ui/button/Button';
 
