@@ -1,11 +1,13 @@
+import { useEffect } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { loginSchema, LoginSchemaType } from '../schema/login';
-import { loginUser } from '../service/login-user';
+import { selectSessionStatus } from '../selectors/select-session-status';
+import { loginUserThank } from '../service/login-user';
 
 import { PATH_ROUTER } from '@/app/providers/router';
-import { useAppDispatch } from '@/app/providers/store-provider';
+import { useAppDispatch, useAppSelector } from '@/app/providers/store-provider';
 
 export const useLogIn = () => {
   const {
@@ -24,16 +26,22 @@ export const useLogIn = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
+  const status = useAppSelector(selectSessionStatus);
+
   const onSubmit: SubmitHandler<LoginSchemaType> = async (dataForm) => {
     await dispatch(
-      loginUser({
+      loginUserThank({
         email: dataForm.email,
         password: dataForm.password,
       })
     );
-
-    navigate(PATH_ROUTER.MAIN);
   };
 
-  return { control, errors, handleSubmit, onSubmit, Controller };
+  useEffect(() => {
+    if (status === 'succeeded') {
+      navigate(PATH_ROUTER.MAIN);
+    }
+  }, [navigate, status]);
+
+  return { control, errors, handleSubmit, onSubmit, Controller, status };
 };

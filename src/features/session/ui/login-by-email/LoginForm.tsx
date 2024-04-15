@@ -1,7 +1,6 @@
 import { useLogIn } from '../../model/hooks/useLogIn';
-import { selectSessionStatus } from '../../model/selectors/select-session-status';
+import { useResetSessionError } from '../../model/hooks/useResetSessionError';
 
-import { useAppSelector } from '@/app/providers/store-provider';
 import { EmailIcon } from '@/shared/assets/icons/EmailIcon';
 import { LockIcon } from '@/shared/assets/icons/LockIcon';
 import {
@@ -13,12 +12,13 @@ import {
   VALID_CLASS,
 } from '@/shared/constant/classes';
 import { applyClass } from '@/shared/lib/apply-class';
+import { Button } from '@/shared/ui/button/Button';
 import { CustomInput } from '@/shared/ui/input/Input';
 
 export const LoginForm = () => {
-  const { Controller, control, errors, handleSubmit, onSubmit } = useLogIn();
+  const { Controller, control, errors, handleSubmit, onSubmit, status } = useLogIn();
 
-  const status = useAppSelector(selectSessionStatus);
+  const { error: loginError, handleResetError } = useResetSessionError();
 
   return (
     <form onSubmit={(event) => void handleSubmit(onSubmit)(event)}>
@@ -30,7 +30,7 @@ export const LoginForm = () => {
               icon={
                 <EmailIcon
                   fill={applyClass(
-                    errors.email?.message,
+                    errors.email?.message ?? loginError,
                     ERROR,
                     VALID,
                     fieldState.isTouched,
@@ -39,11 +39,15 @@ export const LoginForm = () => {
                 />
               }
               className={applyClass(
-                errors.email?.message,
+                errors.email?.message ?? loginError,
                 ERROR_CLASS,
                 VALID_CLASS,
                 fieldState.isTouched
               )}
+              onChange={(value) => {
+                field.onChange(value);
+                handleResetError();
+              }}
               placeholder='email@test.com'
               errors={errors.email}
               type='text'
@@ -60,7 +64,7 @@ export const LoginForm = () => {
               icon={
                 <LockIcon
                   fill={applyClass(
-                    errors.password,
+                    errors.password ?? loginError,
                     ERROR,
                     VALID,
                     fieldState.isTouched,
@@ -69,7 +73,7 @@ export const LoginForm = () => {
                 />
               }
               className={applyClass(
-                errors.password?.message,
+                errors.password?.message ?? loginError,
                 ERROR_CLASS,
                 VALID_CLASS,
                 fieldState.isTouched,
@@ -80,6 +84,10 @@ export const LoginForm = () => {
               type='password'
               gap='mb-4'
               {...field}
+              onChange={(value) => {
+                field.onChange(value);
+                handleResetError();
+              }}
             />
           )}
           control={control}
@@ -87,13 +95,13 @@ export const LoginForm = () => {
         />
       </div>
 
-      <button
+      <Button
         className='w-full rounded-md bg-black py-[13px] font-medium text-white disabled:bg-neutral-300'
         disabled={status === 'pending'}
         type='submit'
       >
         Вход
-      </button>
+      </Button>
     </form>
   );
 };

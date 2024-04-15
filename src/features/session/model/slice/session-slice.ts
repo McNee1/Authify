@@ -1,8 +1,9 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { createUserThunk } from '../service/create-user';
-import { loginUser } from '../service/login-user';
+import { loginUserThank } from '../service/login-user';
 import { Session, SessionSchema } from '../types/session.type';
 
+import { getErrorMessage } from '@/shared/lib/get-error-message';
 import { localStorageManager } from '@/shared/lib/local-storage-manager';
 
 const LC = localStorageManager();
@@ -17,22 +18,17 @@ const sessionSlice = createSlice({
   name: 'session',
   initialState,
   reducers: {
-    setAuth: (state, action: PayloadAction<SessionSchema>) => {
-      state.sessionData = action.payload.sessionData;
-      LC.set('session', { ...action.payload.sessionData });
-    },
-    logout: (state) => {
-      state.sessionData = null;
-      LC.remove('session');
+    resetError: (state) => {
+      state.error = null;
     },
   },
   extraReducers(builder) {
     builder
-      .addCase(loginUser.pending, (state) => {
+      .addCase(loginUserThank.pending, (state) => {
         state.status = 'pending';
         state.error = null;
       })
-      .addCase(loginUser.fulfilled, (state, { payload }) => {
+      .addCase(loginUserThank.fulfilled, (state, { payload }) => {
         const sessionData = {
           idToken: payload.idToken,
           refreshToken: payload.refreshToken,
@@ -45,13 +41,14 @@ const sessionSlice = createSlice({
         state.status = 'succeeded';
         state.error = null;
       })
-      .addCase(loginUser.rejected, (state, actions) => {
-        console.log(actions);
-        if (actions.payload) {
-          state.error = actions.payload as string;
+      .addCase(loginUserThank.rejected, (state, action) => {
+        console.log(action);
+        if (typeof action.payload === 'string') {
+          state.error = getErrorMessage(action.payload);
         }
         state.status = 'failed';
       });
+
     builder
       .addCase(createUserThunk.pending, (state) => {
         state.status = 'pending';
@@ -70,10 +67,9 @@ const sessionSlice = createSlice({
         state.status = 'succeeded';
         state.error = null;
       })
-      .addCase(createUserThunk.rejected, (state, actions) => {
-        console.log(actions);
-        if (actions.payload) {
-          state.error = actions.payload as string;
+      .addCase(createUserThunk.rejected, (state, action) => {
+        if (typeof action.payload === 'string') {
+          state.error = getErrorMessage(action.payload);
         }
         state.status = 'failed';
       });

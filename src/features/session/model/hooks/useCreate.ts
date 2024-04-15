@@ -1,11 +1,13 @@
+import { useEffect } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { createSchema, CreateSchemaType } from '../schema/create';
+import { selectSessionStatus } from '../selectors/select-session-status';
 import { createUserThunk } from '../service/create-user';
 
 import { PATH_ROUTER } from '@/app/providers/router';
-import { useAppDispatch } from '@/app/providers/store-provider';
+import { useAppDispatch, useAppSelector } from '@/app/providers/store-provider';
 
 export const useCreateUser = () => {
   const {
@@ -24,6 +26,7 @@ export const useCreateUser = () => {
 
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const status = useAppSelector(selectSessionStatus);
 
   const onSubmit: SubmitHandler<CreateSchemaType> = async (dataForm) => {
     await dispatch(
@@ -33,9 +36,13 @@ export const useCreateUser = () => {
         userName: dataForm.userName,
       })
     );
-
-    navigate(PATH_ROUTER.MAIN);
   };
 
-  return { onSubmit, errors, control, handleSubmit, Controller };
+  useEffect(() => {
+    if (status === 'succeeded') {
+      navigate(PATH_ROUTER.MAIN);
+    }
+  }, [navigate, status]);
+
+  return { onSubmit, errors, control, handleSubmit, Controller, status };
 };
