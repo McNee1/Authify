@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import { PATH_ROUTER } from '@/app/providers/router';
 import { useAppSelector } from '@/app/providers/store-provider';
@@ -88,13 +88,13 @@ export const Header = () => {
           {isAuth ? (
             <>
               <div className='ml-auto mr-5'>{userName}</div>
-              <a href='/'>
+              <Link to={PATH_ROUTER.PROFILE}>
                 <Avatar
                   userName={userName}
                   userImg={userImg}
                   size='sm'
                 />
-              </a>
+              </Link>
             </>
           ) : (
             <Button

@@ -2,14 +2,12 @@ import { configureStore } from '@reduxjs/toolkit';
 import { StateSchema } from './state-schema';
 
 import { userReducer } from '@/entities/user';
-import { usersListReducer } from '@/entities/users-list';
-import { sessionReducer } from '@/features/session/model/slice/session-slice';
+import { sessionReducer } from '@/features/session';
 
 export const store = configureStore<StateSchema>({
   reducer: {
     session: sessionReducer,
     user: userReducer,
-    users: usersListReducer,
   },
 });
 

@@ -1,16 +1,19 @@
-import { User } from '@/entities/user';
+import { Link } from 'react-router-dom';
+
+import { PATH_ROUTER } from '@/app/providers/router';
+import { UsersListSchema } from '@/pages/users-page/model/types/index.type';
 import { Avatar } from '@/shared/ui/avatar/Avatar';
 
 interface UsersListProps {
-  usersList: User[] | null;
+  usersList: UsersListSchema[] | null;
 }
 
 export const UsersList = ({ usersList }: UsersListProps) => {
   return (
     <div>
       {usersList?.map((user, id) => (
-        <a
-          href='/'
+        <Link
+          to={{ pathname: `${PATH_ROUTER.GUEST}/${user.uId}` }}
           key={id}
         >
           <div className='flex items-center border-b p-4 py-2.5 first-of-type:border-t'>
@@ -23,10 +26,8 @@ export const UsersList = ({ usersList }: UsersListProps) => {
               <div className='ml-auto font-normal text-zinc-500'>{user.email}</div>
             </div>
           </div>
-        </a>
+        </Link>
       ))}
     </div>
   );
 };
-
-export default UsersList;

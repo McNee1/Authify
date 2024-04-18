@@ -4,12 +4,18 @@ const BASE_URL = import.meta.env.VITE_APP_FB_DATABASE_URL;
 
 const AUTH_URL = import.meta.env.VITE_APP_FB_AUTH_URL;
 
+const FB_STORAGE_URL = import.meta.env.VITE_APP_FB_STORAGE_URL;
+
 export const baseAxios = axios.create({
   baseURL: BASE_URL,
 });
 
 export const authAxios = axios.create({
   baseURL: AUTH_URL,
+});
+
+export const storageAxios = axios.create({
+  baseURL: FB_STORAGE_URL,
 });
 
 // // Add a response interceptor to handle errors and update the idToken

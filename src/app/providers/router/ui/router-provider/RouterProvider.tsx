@@ -38,7 +38,11 @@ export const useRouter = () => {
         },
         {
           path: PATH_ROUTER.PROFILE,
-          element: <ProfilePage />,
+          element: <ProfilePage rule='owner' />,
+        },
+        {
+          path: `${PATH_ROUTER.GUEST}/:guestId`,
+          element: <ProfilePage rule='guest' />,
         },
       ],
     },
