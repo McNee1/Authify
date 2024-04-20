@@ -30,7 +30,7 @@ export const Header = () => {
         <div className='flex items-center justify-between py-3'>
           <div className='flex items-center'>
             <div className='mr-[20px]'>
-              <a href='/'>
+              <Link to={PATH_ROUTER.MAIN}>
                 <svg
                   enableBackground='new 0 0 715.412 283.951'
                   viewBox='0 0 715.412 283.951'
@@ -78,7 +78,7 @@ export const Header = () => {
                     </g>
                   </g>
                 </svg>
-              </a>
+              </Link>
             </div>
             <span className='hidden w-[225px] sm:block'>
               Lorem ipsum dolor sit amet consectetur.
