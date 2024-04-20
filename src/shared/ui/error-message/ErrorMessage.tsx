@@ -1,15 +1,25 @@
+import clsx from 'clsx/lite';
+
+type Round = 'rounded' | 'rounded-md' | 'rounded-lg' | 'rounded-full';
+
 interface ErrorMessageProps {
+  className?: string;
   error: string | null;
   onClick?: () => void;
+  round?: Round;
 }
 
-export const ErrorMessage = ({ error, onClick }: ErrorMessageProps) => {
+export const ErrorMessage = ({ error, onClick, className, round }: ErrorMessageProps) => {
   if (!error) {
     return null;
   }
   return (
     <div
-      className='mt-2 flex items-start rounded-lg bg-red-100 p-4 text-red-800 dark:bg-gray-800 dark:text-red-400'
+      className={clsx(
+        'flex items-start  bg-red-100 p-4 text-red-800 dark:bg-gray-800 dark:text-red-400',
+        className,
+        round
+      )}
       id='alert-2'
       role='alert'
     >

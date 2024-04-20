@@ -5,6 +5,7 @@ import { ErrorMessage } from '@/shared/ui/error-message/ErrorMessage';
 export const LoginPage = () => {
   const error = useAppSelector(selectSessionError);
   const dispatch = useAppDispatch();
+
   return (
     <div className='container m-auto'>
       <div className='m-auto max-w-[400px]'>
@@ -14,6 +15,8 @@ export const LoginPage = () => {
         </div>
         <ErrorMessage
           onClick={() => dispatch(sessionAction.resetError())}
+          round='rounded-md'
+          className='mt-2'
           error={error}
         />
       </div>

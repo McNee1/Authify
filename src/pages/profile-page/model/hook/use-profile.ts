@@ -5,6 +5,8 @@ import type { Rule } from '../types/index.type';
 import { useAppSelector } from '@/app/providers/store-provider';
 import type { User } from '@/entities/user';
 import { selectAccessToken, selectUserId } from '@/features/session';
+import { OWNER } from '@/shared/constant/const';
+import { handleResponseError } from '@/shared/lib/handle-response-error';
 import { ProfileService } from '@/shared/services/profile';
 
 export const useProfile = (rule: Rule) => {
@@ -15,9 +17,11 @@ export const useProfile = (rule: Rule) => {
 
   const [isLoading, setLoading] = useState(false);
 
+  const [error, setError] = useState<string | null>(null);
+
   const { guestId } = useParams();
 
-  const uId = rule === 'owner' ? ownerId : guestId;
+  const uId = rule === OWNER ? ownerId : guestId;
 
   useEffect(() => {
     const profileService = new ProfileService();
@@ -32,6 +36,7 @@ export const useProfile = (rule: Rule) => {
         });
         setProfileData(data);
       } catch (error) {
+        handleResponseError(error, setError);
         console.error('Error fetching profile info:', error);
       } finally {
         setLoading(false);
@@ -41,5 +46,5 @@ export const useProfile = (rule: Rule) => {
     void fetchProfileInfo();
   }, [guestId, idToken, rule, uId]);
 
-  return { profileData, isLoading, idToken, uId };
+  return { profileData, isLoading, uId, error };
 };

@@ -52,7 +52,6 @@ const sessionSlice = createSlice({
         state.error = null;
       })
       .addCase(loginUserThank.rejected, (state, action) => {
-        console.log(action);
         if (typeof action.payload === 'string') {
           state.error = getErrorMessage(action.payload);
         }

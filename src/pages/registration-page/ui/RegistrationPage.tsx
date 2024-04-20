@@ -15,6 +15,8 @@ export const RegistrationPage = () => {
         <CreateUser />
         <ErrorMessage
           onClick={() => dispatch(sessionAction.resetError())}
+          round='rounded-md'
+          className='mt-2'
           error={error}
         />
       </div>

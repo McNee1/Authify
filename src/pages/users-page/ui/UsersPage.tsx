@@ -1,21 +1,18 @@
 import { useUsers } from '../model/hook/useUsers';
 import { UsersList } from './users-lust/ui/UsersList';
 
-import { useAppSelector } from '@/app/providers/store-provider';
-import { selectAccessToken } from '@/features/session';
-// import { ErrorMessage } from '@/shared/ui/error-message/ErrorMessage';
+import { ErrorMessage } from '@/shared/ui/error-message/ErrorMessage';
 import { Spinner } from '@/shared/ui/spinner/Spinner';
 
 export const UsersPage = () => {
-  const token = useAppSelector(selectAccessToken);
-  const { isLoading, users } = useUsers(token);
+  const { isLoading, users, error } = useUsers();
 
   if (isLoading) {
     return <Spinner />;
   }
-  // if (error) {
-  //   return <ErrorMessage error={error} />;
-  // }
+  if (error) {
+    return <ErrorMessage error={error} />;
+  }
 
   return (
     <>

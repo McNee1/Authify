@@ -6,6 +6,7 @@ import { LoginPage } from '@/pages/login-page';
 import { ProfilePage } from '@/pages/profile-page';
 import { RegistrationPage } from '@/pages/registration-page';
 import { UsersPage } from '@/pages/users-page';
+import { OWNER } from '@/shared/constant/const';
 import { AuthLayout } from '@/widgets/layouts/auth-layout';
 import { MainLayout } from '@/widgets/layouts/main-layout';
 
@@ -38,7 +39,7 @@ export const useRouter = () => {
         },
         {
           path: PATH_ROUTER.PROFILE,
-          element: <ProfilePage rule='owner' />,
+          element: <ProfilePage rule={OWNER} />,
         },
         {
           path: `${PATH_ROUTER.GUEST}/:guestId`,

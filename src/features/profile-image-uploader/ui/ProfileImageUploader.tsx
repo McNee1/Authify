@@ -2,21 +2,21 @@ import { useAddImage } from '../model/hooks/use-add-image';
 import { useDeleteImage } from '../model/hooks/use-delete-image';
 import { useFetchImage } from '../model/hooks/use-fetch-image';
 
+import { useAppSelector } from '@/app/providers/store-provider';
+import { selectAccessToken } from '@/features/session';
 import { Rule } from '@/pages/profile-page';
+import { OWNER } from '@/shared/constant/const';
 import { Button } from '@/shared/ui/button/Button';
 import { ProfileHeroImage } from '@/shared/ui/profile-hero-image/ProfileHeroImage';
 
 interface ProfileImageUploaderProps {
-  idToken: string | null;
   rule: Rule;
   uId: string | null | undefined;
 }
 
-export const ProfileImageUploader = ({
-  idToken,
-  uId,
-  rule,
-}: ProfileImageUploaderProps) => {
+export const ProfileImageUploader = ({ uId, rule }: ProfileImageUploaderProps) => {
+  const idToken = useAppSelector(selectAccessToken);
+
   const { heroImage, isLoadingImg, setHeroImage } = useFetchImage(uId, idToken);
 
   const { handleAddImage } = useAddImage(uId, idToken, setHeroImage);
@@ -27,7 +27,7 @@ export const ProfileImageUploader = ({
     <div className='relative h-48'>
       <ProfileHeroImage image={heroImage} />
 
-      {rule === 'owner' && !isLoadingImg && (
+      {rule === OWNER && !isLoadingImg && (
         <div className='duration-100" absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-[5px] border border-neutral-300 bg-white ease-in hover:bg-zinc-200'>
           {heroImage ? (
             <Button
