@@ -7,6 +7,10 @@ export const handleResponseError = <T>(
 ) => {
   if (isAxiosError(error)) {
     const { response } = error;
+
+    if (response?.status === 401) {
+      return;
+    }
     if (response) {
       const errorMessage = `HTTP Error: ${error.message}`;
       setError(errorMessage);

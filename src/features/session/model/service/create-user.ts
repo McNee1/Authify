@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosError, isAxiosError } from 'axios';
 import { CreateSchemaType } from '../schema/create';
-import type { AuthErrorResponse } from '../types/auth-error-response.type';
+import type { CustomErrorResponse } from '../types/error-response.type';
 
 import { userAction } from '@/entities/user';
 import { AuthService } from '@/shared/services/auth';
@@ -51,7 +51,7 @@ export const createUserThunk = createAsyncThunk(
 
       return data;
     } catch (err) {
-      const error = err as AxiosError<AuthErrorResponse>;
+      const error = err as AxiosError<CustomErrorResponse>;
       if (isAxiosError(error)) {
         if (error.response?.data) {
           return thunkApi.rejectWithValue(error.response.data.error.message);

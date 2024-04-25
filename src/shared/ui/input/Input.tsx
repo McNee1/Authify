@@ -6,18 +6,30 @@ interface CustomInputProps extends ComponentPropsWithRef<'input'> {
   errors?: FieldError;
   gap?: string;
   icon?: ReactNode;
+  label?: string;
+  labelClassName?: string;
 }
 
 export const CustomInput = forwardRef<HTMLInputElement, CustomInputProps>(
   function CustomInput(props, ref) {
-    const { gap, icon, errors, className, ...rest } = props;
+    const { gap, icon, errors, className, label, labelClassName, ...rest } = props;
+
     return (
       <>
-        <div className={clsx('relative', !errors && gap)}>
+        <div className={clsx(!label && 'relative', !errors && gap)}>
           {icon && (
             <div className='pointer-events-none absolute inset-y-0 left-0 flex items-center pl-5'>
               {icon}
             </div>
+          )}
+
+          {label && (
+            <label
+              className={labelClassName}
+              htmlFor={rest.id}
+            >
+              {label}
+            </label>
           )}
           <input
             ref={ref}

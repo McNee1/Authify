@@ -5,7 +5,8 @@ export interface AuthUserSchema {
 
 export interface UpdateUserSchema {
   deleteAttribute?: string[];
-  displayName: string;
+  displayName?: string;
+  email?: string;
   idToken: string;
   photoUrl?: string;
 }

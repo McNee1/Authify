@@ -1,4 +1,4 @@
-export interface AuthErrorResponse {
+export interface CustomErrorResponse {
   error: {
     code: number;
     message: string;

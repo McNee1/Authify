@@ -1,8 +1,11 @@
+import { useState } from 'react';
 import { useProfile } from '../model/hook/use-profile';
 import { ProfilePageProps } from '../model/types/index.type';
 
+import { User } from '@/entities/user';
 import { ProfileImageUploader } from '@/features/profile-image-uploader';
-import { OWNER } from '@/shared/constant/const';
+import { UpdateProfileInfo } from '@/features/update-profile-info';
+import { OWNER } from '@/shared/constant/common';
 import { Avatar } from '@/shared/ui/avatar/Avatar';
 import { Button } from '@/shared/ui/button/Button';
 import { ErrorMessage } from '@/shared/ui/error-message/ErrorMessage';
@@ -10,9 +13,23 @@ import { Skeleton } from '@/shared/ui/skeleton/Skeleton';
 import { ProfileCard } from '@/widgets/profile-card';
 
 export const ProfilePage = ({ rule }: ProfilePageProps) => {
-  const { isLoading, profileData, uId, error } = useProfile(rule);
+  const { isLoading, profileData, setProfileData, uId, error } = useProfile(rule);
 
-  if (error) {
+  const [isOpenModal, setIsOpenModal] = useState(false);
+
+  const handleOpenModal = () => {
+    setIsOpenModal(true);
+  };
+  const handleCloseModal = () => {
+    setIsOpenModal(false);
+  };
+
+  const handleUpdateProfile = (formData: User) => {
+    setProfileData(formData);
+    console.log(formData, '@');
+  };
+
+  if (!profileData && error) {
     return <ErrorMessage error={error} />;
   }
   if (isLoading) {
@@ -35,9 +52,12 @@ export const ProfilePage = ({ rule }: ProfilePageProps) => {
           />
 
           <ProfileCard
-            logoutBtn={
+            editBtn={
               rule === OWNER && (
-                <Button className='flex flex-row items-center rounded-md border border-neutral-300 px-[21px] py-1.5 duration-100 ease-in hover:bg-zinc-200'>
+                <Button
+                  className='flex flex-row items-center rounded-md border border-neutral-300 px-[21px] py-1.5 duration-100 ease-in hover:bg-zinc-200'
+                  onClick={handleOpenModal}
+                >
                   <>
                     <svg
                       xmlns='http://www.w3.org/2000/svg'
@@ -57,7 +77,7 @@ export const ProfilePage = ({ rule }: ProfilePageProps) => {
                 </Button>
               )
             }
-            editBtn={
+            logoutBtn={
               rule === OWNER && (
                 <Button className='mb-4 flex flex-row items-center rounded-md border border-neutral-300 px-[21px] py-1.5 duration-100 ease-in hover:bg-zinc-200'>
                   <>
@@ -86,6 +106,12 @@ export const ProfilePage = ({ rule }: ProfilePageProps) => {
           />
         </div>
       </div>
+      <UpdateProfileInfo
+        onUpdateProfile={handleUpdateProfile}
+        onCloseModal={handleCloseModal}
+        profileData={profileData}
+        isOpenModal={isOpenModal}
+      />
     </>
   );
 };

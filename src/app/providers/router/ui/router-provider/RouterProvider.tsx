@@ -6,7 +6,7 @@ import { LoginPage } from '@/pages/login-page';
 import { ProfilePage } from '@/pages/profile-page';
 import { RegistrationPage } from '@/pages/registration-page';
 import { UsersPage } from '@/pages/users-page';
-import { OWNER } from '@/shared/constant/const';
+import { OWNER } from '@/shared/constant/common';
 import { AuthLayout } from '@/widgets/layouts/auth-layout';
 import { MainLayout } from '@/widgets/layouts/main-layout';
 

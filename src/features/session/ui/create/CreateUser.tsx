@@ -11,7 +11,7 @@ import {
   ERROR_CLASS,
   VALID,
   VALID_CLASS,
-} from '@/shared/constant/classes';
+} from '@/shared/constant/input-class';
 import { applyClass } from '@/shared/lib/apply-class';
 import { Button } from '@/shared/ui/button/Button';
 import { CustomInput } from '@/shared/ui/input/Input';

@@ -5,7 +5,7 @@ import { useFetchImage } from '../model/hooks/use-fetch-image';
 import { useAppSelector } from '@/app/providers/store-provider';
 import { selectAccessToken } from '@/features/session';
 import { Rule } from '@/pages/profile-page';
-import { OWNER } from '@/shared/constant/const';
+import { OWNER } from '@/shared/constant/common';
 import { Button } from '@/shared/ui/button/Button';
 import { ProfileHeroImage } from '@/shared/ui/profile-hero-image/ProfileHeroImage';
 
