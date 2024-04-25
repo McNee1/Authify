@@ -31,6 +31,10 @@ const sessionSlice = createSlice({
       state.sessionData = sessionData;
       LC.set('session', sessionData);
     },
+    logout: (state) => {
+      state.sessionData = null;
+      LC.remove('session');
+    },
   },
   extraReducers(builder) {
     builder
