@@ -1,10 +1,9 @@
 import { useProfile } from '../model/hook/use-profile';
 import { useUpdateProfile } from '../model/hook/use-update-profile';
 import { ProfilePageProps } from '../model/types/index.type';
-import { EditButton } from './edit-button/EditButton';
 
 import { ProfileImageUploader } from '@/features/profile-image-uploader';
-import { ProfileUpdateModal } from '@/features/profile-update-modal';
+import { OpenModalBtn, ProfileUpdateModal } from '@/features/profile-update';
 import { Logout } from '@/features/session/ui/logout/Logout';
 import { OWNER } from '@/shared/constant/common';
 import { Avatar } from '@/shared/ui/avatar/Avatar';
@@ -41,7 +40,7 @@ export const ProfilePage = ({ rule }: ProfilePageProps) => {
           />
 
           <ProfileCard
-            editBtn={rule === OWNER && <EditButton onOpenModal={handleOpenModal} />}
+            editBtn={rule === OWNER && <OpenModalBtn onOpenModal={handleOpenModal} />}
             description={profileData?.description ?? null}
             logoutBtn={rule === OWNER && <Logout />}
             userName={profileData?.name ?? null}
