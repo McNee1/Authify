@@ -26,7 +26,7 @@ export const Avatar = ({
         sizeAvatar,
         className,
         isLoading && 'bg-zinc-200',
-        'flex rounded-full border border-neutral-200 bg-zinc-100'
+        'flex rounded-full border border-neutral-200 bg-zinc-100  shadow-md'
       )}
     >
       {userImg ? (
@@ -37,7 +37,9 @@ export const Avatar = ({
           alt='avatar'
         />
       ) : (
-        <div className={[sizeText, 'm-auto'].join(' ')}>{userName?.[0]}</div>
+        <div className={[sizeText, 'm-auto'].join(' ')}>
+          {userName?.[0].toUpperCase()}
+        </div>
       )}
     </div>
   );

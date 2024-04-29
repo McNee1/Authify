@@ -7,7 +7,7 @@ import type { User } from '@/entities/user';
 import { selectAccessToken, selectUserId } from '@/features/session';
 import { OWNER } from '@/shared/constant/common';
 import { handleResponseError } from '@/shared/lib/handle-response-error';
-import { ProfileService } from '@/shared/services/profile';
+import { UsersService } from '@/shared/services/users';
 
 export const useProfile = (rule: Rule) => {
   const idToken = useAppSelector(selectAccessToken);
@@ -24,7 +24,7 @@ export const useProfile = (rule: Rule) => {
   const uId = rule === OWNER ? ownerId : guestId;
 
   useEffect(() => {
-    const profileService = new ProfileService();
+    const usersService = new UsersService();
 
     if (!uId || !idToken) return;
 
@@ -32,7 +32,7 @@ export const useProfile = (rule: Rule) => {
       setLoading(true);
       setError(null);
       try {
-        const { data } = await profileService.getProfileInfo({
+        const { data } = await usersService.getUserInfo({
           params: { idToken, uId },
         });
 

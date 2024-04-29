@@ -29,7 +29,7 @@ export class AuthService {
     );
   }
 
-  async updateUserInfo({ params, config }: AxiosRequestConfig<UpdateUserSchema>) {
+  async updateProfile({ params, config }: AxiosRequestConfig<UpdateUserSchema>) {
     return authAxios.post(
       `:update?key=${API_KEY}`,
       { ...params, returnSecureToken: true },

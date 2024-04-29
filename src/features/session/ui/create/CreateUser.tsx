@@ -1,9 +1,6 @@
 import { useCreateUser } from '../../model/hooks/useCreate';
 import { useResetSessionError } from '../../model/hooks/useResetSessionError';
 
-import { EmailIcon } from '@/shared/assets/icons/EmailIcon';
-import { LockIcon } from '@/shared/assets/icons/LockIcon';
-import { PersonIcon } from '@/shared/assets/icons/PersonIcon';
 import {
   DEFAULT,
   DEFAULT_CLASS,
@@ -14,7 +11,10 @@ import {
 } from '@/shared/constant/input-class';
 import { applyClass } from '@/shared/lib/apply-class';
 import { Button } from '@/shared/ui/button/Button';
-import { CustomInput } from '@/shared/ui/input/Input';
+import { FormField } from '@/shared/ui/form-field/FormField';
+import { EmailIcon } from '@/shared/ui/icons/EmailIcon';
+import { LockIcon } from '@/shared/ui/icons/LockIcon';
+import { PersonIcon } from '@/shared/ui/icons/PersonIcon';
 
 export const CreateUser = () => {
   const { Controller, control, errors, handleSubmit, onSubmit, status } = useCreateUser();
@@ -26,7 +26,7 @@ export const CreateUser = () => {
       <div className='flex flex-col px-[4.5px]'>
         <Controller
           render={({ field, fieldState }) => (
-            <CustomInput
+            <FormField
               {...field}
               icon={
                 <PersonIcon
@@ -61,7 +61,7 @@ export const CreateUser = () => {
         />
         <Controller
           render={({ field, fieldState }) => (
-            <CustomInput
+            <FormField
               {...field}
               icon={
                 <EmailIcon
@@ -97,7 +97,7 @@ export const CreateUser = () => {
 
         <Controller
           render={({ field, fieldState }) => (
-            <CustomInput
+            <FormField
               icon={
                 <LockIcon
                   fill={applyClass(

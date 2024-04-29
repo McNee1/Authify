@@ -1,9 +1,8 @@
-import { redirect } from 'react-router-dom';
 import { Store } from '@reduxjs/toolkit';
 import axios, { AxiosError } from 'axios';
 
-import { PATH_ROUTER } from '@/app/providers/router';
 import { RootState } from '@/app/providers/store-provider';
+import { userAction } from '@/entities/user';
 import { sessionAction } from '@/features/session';
 import { UpdateSession } from '@/features/session/model/types/session.type';
 
@@ -55,7 +54,8 @@ export const interceptors = (store: Store) => {
 
           return baseAxios(originalConfig);
         } catch (error: unknown) {
-          redirect(PATH_ROUTER.LOGIN);
+          store.dispatch(userAction.deleteUser());
+          store.dispatch(sessionAction.logout());
 
           return Promise.reject(
             error instanceof Error ? error : new Error(String(error))

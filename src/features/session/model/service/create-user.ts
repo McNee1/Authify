@@ -32,7 +32,7 @@ export const createUserThunk = createAsyncThunk(
           })
         );
 
-        await authService.updateUserInfo({
+        await authService.updateProfile({
           params: {
             displayName: dataForm.userName,
             idToken: data.idToken,

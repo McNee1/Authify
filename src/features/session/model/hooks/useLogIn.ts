@@ -28,8 +28,8 @@ export const useLogIn = () => {
 
   const status = useAppSelector(selectSessionStatus);
 
-  const onSubmit: SubmitHandler<LoginSchemaType> = async (dataForm) => {
-    await dispatch(
+  const onSubmit: SubmitHandler<LoginSchemaType> = (dataForm) => {
+    void dispatch(
       loginUserThank({
         email: dataForm.email,
         password: dataForm.password,
@@ -39,7 +39,7 @@ export const useLogIn = () => {
 
   useEffect(() => {
     if (status === 'succeeded') {
-      navigate(PATH_ROUTER.MAIN);
+      navigate(`/${PATH_ROUTER.PROFILE}`);
     }
   }, [navigate, status]);
 

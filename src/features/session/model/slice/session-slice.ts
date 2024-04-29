@@ -35,6 +35,10 @@ const sessionSlice = createSlice({
       state.sessionData = null;
       LC.remove('session');
     },
+    setError: (state, { payload }: PayloadAction<string>) => {
+      console.log(payload);
+      state.error = getErrorMessage(payload);
+    },
   },
   extraReducers(builder) {
     builder

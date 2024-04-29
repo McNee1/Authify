@@ -2,7 +2,7 @@ import { ComponentPropsWithRef, forwardRef, ReactNode } from 'react';
 import { FieldError } from 'react-hook-form';
 import clsx from 'clsx/lite';
 
-interface CustomInputProps extends ComponentPropsWithRef<'input'> {
+interface FormFieldProps extends ComponentPropsWithRef<'input'> {
   errors?: FieldError;
   gap?: string;
   icon?: ReactNode;
@@ -10,8 +10,8 @@ interface CustomInputProps extends ComponentPropsWithRef<'input'> {
   labelClassName?: string;
 }
 
-export const CustomInput = forwardRef<HTMLInputElement, CustomInputProps>(
-  function CustomInput(props, ref) {
+export const FormField = forwardRef<HTMLInputElement, FormFieldProps>(
+  function FormField(props, ref) {
     const { gap, icon, errors, className, label, labelClassName, ...rest } = props;
 
     return (

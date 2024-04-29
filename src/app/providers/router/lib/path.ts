@@ -3,5 +3,5 @@ export const PATH_ROUTER = {
   REGISTRATION: 'registration',
   PROFILE: 'profile',
   GUEST: 'guest',
-  MAIN: '/',
+  USERS: '/',
 };

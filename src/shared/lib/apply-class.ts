@@ -5,14 +5,11 @@ export const applyClass = <T>(
   isTouched?: boolean | undefined,
   defaultClass?: string | undefined
 ) => {
-  if (isTouched === undefined) {
-    return error ? errorClass : validClass;
-  }
   if (error) {
     return errorClass;
-  } else if (!isTouched && error === undefined) {
+  } else if (!isTouched) {
     return defaultClass;
-  } else if (isTouched && error === undefined) {
+  } else {
     return validClass;
   }
 };

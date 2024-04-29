@@ -1,110 +1,32 @@
-import { useEffect } from 'react';
-import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { Controller } from 'react-hook-form';
 import clsx from 'clsx/lite';
-import { updateSchema, UpdateSchemaType } from '../model/schema';
+import { useFetchProfileInfo } from '../model/hook/use-fetch-profile-info';
 
-import { useAppDispatch, useAppSelector } from '@/app/providers/store-provider';
-import { User, userAction } from '@/entities/user';
-import { selectAccessToken, selectUserId } from '@/features/session';
+import { User } from '@/entities/user';
 import { DEFAULT_CLASS, ERROR_CLASS, VALID_CLASS } from '@/shared/constant/input-class';
 import { applyClass } from '@/shared/lib/apply-class';
-import { AuthService } from '@/shared/services/auth';
-import { ProfileService } from '@/shared/services/profile';
 import { Button } from '@/shared/ui/button/Button';
-import { CustomInput } from '@/shared/ui/input/Input';
+import { FormField } from '@/shared/ui/form-field/FormField';
 import { Modal } from '@/shared/ui/modal/Modal';
+import { TextArea } from '@/shared/ui/text-area/TextArea';
 
-interface UpdateProfileInfoProps {
+interface ProfileUpdateModalProps {
   isOpenModal: boolean;
   onCloseModal: () => void;
   onUpdateProfile: (data: User) => void;
   profileData: User | null;
 }
 
-export const UpdateProfileInfo = ({
+export const ProfileUpdateModal = ({
   isOpenModal,
   onCloseModal,
   profileData,
   onUpdateProfile,
-}: UpdateProfileInfoProps) => {
-  const {
-    control,
-    handleSubmit,
-    register,
-    getFieldState,
-
-    formState: { errors },
-  } = useForm<UpdateSchemaType>({
-    resolver: zodResolver(updateSchema),
-    mode: 'onBlur',
-    defaultValues: {
-      userName: profileData?.name,
-      email: profileData?.email,
-      description: profileData?.description,
-      imageUrl: profileData?.photoURL ?? '',
-    },
-  });
-  useEffect(() => {
-    console.log(profileData);
-  }, [profileData]);
-  const description = getFieldState('description');
-  const dispatch = useAppDispatch();
-
-  const uId = useAppSelector(selectUserId);
-  const idToken = useAppSelector(selectAccessToken);
-
-  const onSubmit: SubmitHandler<UpdateSchemaType> = async (dataForm, e) => {
-    e?.preventDefault();
-
-    const profileService = new ProfileService();
-    const authService = new AuthService();
-
-    if (!idToken || !uId) return;
-
-    const data = await profileService.updateProfileInfo({
-      params: {
-        idToken: idToken,
-        uId: uId,
-
-        updatedInfo: {
-          name: dataForm.userName,
-          email: dataForm.email,
-          photoURL: dataForm.imageUrl,
-          description: dataForm.description,
-        },
-      },
-    });
-
-    console.log(data);
-
-    const data1 = await authService.updateUserInfo({
-      params: {
-        idToken: idToken,
-        email: dataForm.email,
-        displayName: dataForm.userName,
-        photoUrl: dataForm.imageUrl,
-      },
-    });
-    onUpdateProfile({
-      email: dataForm.email,
-      name: dataForm.userName,
-      photoURL: dataForm.imageUrl,
-      description: dataForm.description,
-    });
-    dispatch(
-      userAction.setUser({
-        userData: {
-          name: dataForm.userName,
-          photoURL: dataForm.imageUrl,
-          email: dataForm.email,
-        },
-      })
-    );
-
-    console.log(data1);
-  };
-
+}: ProfileUpdateModalProps) => {
+  const { onSubmit, control, errors, handleSubmit } = useFetchProfileInfo(
+    profileData,
+    onUpdateProfile
+  );
   return (
     <Modal
       onClose={onCloseModal}
@@ -121,7 +43,7 @@ export const UpdateProfileInfo = ({
               <Controller
                 render={({ field, fieldState }) => (
                   <>
-                    <CustomInput
+                    <FormField
                       {...field}
                       className={applyClass(
                         errors.userName?.message,
@@ -145,7 +67,7 @@ export const UpdateProfileInfo = ({
               />
               <Controller
                 render={({ field, fieldState }) => (
-                  <CustomInput
+                  <FormField
                     id='email'
                     {...field}
                     className={applyClass(
@@ -169,7 +91,7 @@ export const UpdateProfileInfo = ({
 
               <Controller
                 render={({ field, fieldState }) => (
-                  <CustomInput
+                  <FormField
                     id='img'
                     {...field}
                     className={applyClass(
@@ -192,27 +114,29 @@ export const UpdateProfileInfo = ({
               />
 
               <div className='mb-4'>
-                <label
-                  className='mb-1 block font-medium text-zinc-500'
-                  htmlFor='description'
-                >
-                  Описание
-                </label>
-                <textarea
-                  id='description'
-                  rows={4}
-                  {...register('description')}
-                  className={clsx(
-                    applyClass(
-                      errors.description?.message,
-                      ERROR_CLASS,
-                      VALID_CLASS,
-                      description.isTouched,
-                      DEFAULT_CLASS
-                    ),
-                    'm-0 w-full rounded-md border p-3 text-black focus:outline-none'
+                <Controller
+                  render={({ field, fieldState }) => (
+                    <TextArea
+                      {...field}
+                      className={clsx(
+                        applyClass(
+                          errors.description?.message,
+                          ERROR_CLASS,
+                          VALID_CLASS,
+                          fieldState.isTouched,
+                          DEFAULT_CLASS
+                        ),
+                        'm-0 w-full rounded-md border p-3 text-black focus:outline-none'
+                      )}
+                      placeholder='Lorem ipsum dolor sit amet consectetur...'
+                      labelClassName='mb-1 block font-medium text-zinc-500'
+                      label='Описание'
+                      id='description'
+                      rows={4}
+                    />
                   )}
-                  placeholder='Lorem ipsum dolor sit amet consectetur...'
+                  name='description'
+                  control={control}
                 />
               </div>
             </div>

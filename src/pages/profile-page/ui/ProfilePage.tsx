@@ -1,12 +1,11 @@
-import { useState } from 'react';
 import { useProfile } from '../model/hook/use-profile';
+import { useUpdateProfile } from '../model/hook/use-update-profile';
 import { ProfilePageProps } from '../model/types/index.type';
 import { EditButton } from './edit-button/EditButton';
 
-import { User } from '@/entities/user';
 import { ProfileImageUploader } from '@/features/profile-image-uploader';
+import { ProfileUpdateModal } from '@/features/profile-update-modal';
 import { Logout } from '@/features/session/ui/logout/Logout';
-import { UpdateProfileInfo } from '@/features/update-profile-info';
 import { OWNER } from '@/shared/constant/common';
 import { Avatar } from '@/shared/ui/avatar/Avatar';
 import { ErrorMessage } from '@/shared/ui/error-message/ErrorMessage';
@@ -16,19 +15,8 @@ import { ProfileCard } from '@/widgets/profile-card';
 export const ProfilePage = ({ rule }: ProfilePageProps) => {
   const { isLoading, profileData, setProfileData, uId, error } = useProfile(rule);
 
-  const [isOpenModal, setIsOpenModal] = useState(false);
-
-  const handleOpenModal = () => {
-    setIsOpenModal(true);
-  };
-  const handleCloseModal = () => {
-    setIsOpenModal(false);
-  };
-
-  const handleUpdateProfile = (formData: User) => {
-    setProfileData(formData);
-    console.log(formData, '@');
-  };
+  const { handleCloseModal, handleOpenModal, handleUpdateProfile, isOpenModal } =
+    useUpdateProfile(setProfileData);
 
   if (!profileData && error) {
     return <ErrorMessage error={error} />;
@@ -62,7 +50,7 @@ export const ProfilePage = ({ rule }: ProfilePageProps) => {
           />
         </div>
       </div>
-      <UpdateProfileInfo
+      <ProfileUpdateModal
         onUpdateProfile={handleUpdateProfile}
         onCloseModal={handleCloseModal}
         profileData={profileData}

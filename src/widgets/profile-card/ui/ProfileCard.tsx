@@ -20,7 +20,7 @@ export const ProfileCard = ({
 }: ProfileCardProps) => {
   return (
     <>
-      <div className='mb-7 flex flex-col items-start justify-between sm:flex-row'>
+      <div className='mb-5 flex flex-col items-start justify-between sm:flex-row'>
         <div className='mb-[10px]'>
           <div className='mb-2 text-3xl font-medium'>{userName}</div>
           <div className='text-zinc-500'>{email}</div>
@@ -28,8 +28,9 @@ export const ProfileCard = ({
         {editBtn}
       </div>
 
-      <div className='mb-14'>
-        {description ?? <span className='text-sm text-zinc-500'>Нету описания</span>}
+      <div className='mb-10'>
+        <h2 className='mb-2 text-base text-zinc-600'>О себе: </h2>
+        <p className='text-sm text-zinc-500'>{description ?? 'Нету описания'}</p>
       </div>
       {logoutBtn}
     </>

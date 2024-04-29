@@ -1,8 +1,6 @@
 import { useLogIn } from '../../model/hooks/useLogIn';
 import { useResetSessionError } from '../../model/hooks/useResetSessionError';
 
-import { EmailIcon } from '@/shared/assets/icons/EmailIcon';
-import { LockIcon } from '@/shared/assets/icons/LockIcon';
 import {
   DEFAULT,
   DEFAULT_CLASS,
@@ -13,7 +11,9 @@ import {
 } from '@/shared/constant/input-class';
 import { applyClass } from '@/shared/lib/apply-class';
 import { Button } from '@/shared/ui/button/Button';
-import { CustomInput } from '@/shared/ui/input/Input';
+import { FormField } from '@/shared/ui/form-field/FormField';
+import { EmailIcon } from '@/shared/ui/icons/EmailIcon';
+import { LockIcon } from '@/shared/ui/icons/LockIcon';
 
 export const LoginForm = () => {
   const { Controller, control, errors, handleSubmit, onSubmit, status } = useLogIn();
@@ -25,7 +25,7 @@ export const LoginForm = () => {
       <div className='flex flex-col px-[4.5px]'>
         <Controller
           render={({ field, fieldState }) => (
-            <CustomInput
+            <FormField
               {...field}
               icon={
                 <EmailIcon
@@ -39,10 +39,11 @@ export const LoginForm = () => {
                 />
               }
               className={applyClass(
-                errors.email?.message ?? loginError,
+                errors.email?.message ?? null,
                 ERROR_CLASS,
                 VALID_CLASS,
-                fieldState.isTouched
+                fieldState.isTouched,
+                DEFAULT_CLASS
               )}
               onChange={(value) => {
                 field.onChange(value);
@@ -60,11 +61,11 @@ export const LoginForm = () => {
 
         <Controller
           render={({ field, fieldState }) => (
-            <CustomInput
+            <FormField
               icon={
                 <LockIcon
                   fill={applyClass(
-                    errors.password ?? loginError,
+                    errors.password?.message ?? loginError,
                     ERROR,
                     VALID,
                     fieldState.isTouched,

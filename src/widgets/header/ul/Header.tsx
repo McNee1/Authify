@@ -25,12 +25,12 @@ export const Header = () => {
   };
 
   return (
-    <header className='bg-white'>
-      <div className='container max-w-7xl border-b border-neutral-200'>
+    <header className='border-b  border-neutral-200 bg-white'>
+      <div className='container max-w-7xl '>
         <div className='flex items-center justify-between py-3'>
           <div className='flex items-center'>
             <div className='mr-[20px]'>
-              <Link to={PATH_ROUTER.MAIN}>
+              <Link to={PATH_ROUTER.USERS}>
                 <svg
                   enableBackground='new 0 0 715.412 283.951'
                   viewBox='0 0 715.412 283.951'

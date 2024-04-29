@@ -40,7 +40,7 @@ export const useCreateUser = () => {
 
   useEffect(() => {
     if (status === 'succeeded') {
-      navigate(PATH_ROUTER.MAIN);
+      navigate(`/${PATH_ROUTER.PROFILE}`);
     }
   }, [navigate, status]);
 

@@ -11,7 +11,7 @@ export const updateSchema = z.object({
     .trim(),
   userName: z
     .string()
-    .min(5, { message: 'Name must contain at least 5 character(s)' })
+    .min(4, { message: 'Name must contain at least 5 character(s)' })
     .max(30)
     .trim(),
   imageUrl: z
