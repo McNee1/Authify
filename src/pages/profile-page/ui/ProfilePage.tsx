@@ -8,6 +8,7 @@ import { Logout } from '@/features/session/ui/logout/Logout';
 import { OWNER } from '@/shared/constant/common';
 import { Avatar } from '@/shared/ui/avatar/Avatar';
 import { ErrorMessage } from '@/shared/ui/error-message/ErrorMessage';
+import { Portal } from '@/shared/ui/portal/Portal';
 import { Skeleton } from '@/shared/ui/skeleton/Skeleton';
 import { ProfileCard } from '@/widgets/profile-card';
 
@@ -49,12 +50,14 @@ export const ProfilePage = ({ rule }: ProfilePageProps) => {
           />
         </div>
       </div>
-      <ProfileUpdateModal
-        onUpdateProfile={handleUpdateProfile}
-        onCloseModal={handleCloseModal}
-        profileData={profileData}
-        isOpenModal={isOpenModal}
-      />
+      <Portal>
+        <ProfileUpdateModal
+          onUpdateProfile={handleUpdateProfile}
+          onCloseModal={handleCloseModal}
+          profileData={profileData}
+          isOpenModal={isOpenModal}
+        />
+      </Portal>
     </>
   );
 };
