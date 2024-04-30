@@ -40,7 +40,7 @@ export const useRouter = () => {
 
       children: [
         {
-          path: '/',
+          path: PATH_ROUTER.USERS,
           element: <UsersPage />,
         },
         {
