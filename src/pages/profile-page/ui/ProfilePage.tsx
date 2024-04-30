@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useProfile } from '../model/hook/use-profile';
 import { useUpdateProfile } from '../model/hook/use-update-profile';
 import { ProfilePageProps } from '../model/types/index.type';
@@ -19,9 +18,6 @@ export const ProfilePage = ({ rule }: ProfilePageProps) => {
   const { handleCloseModal, handleOpenModal, handleUpdateProfile, isOpenModal } =
     useUpdateProfile(setProfileData);
 
-  useEffect(() => {
-    throw Error('foo');
-  });
   if (!profileData && error) {
     return <ErrorMessage error={error} />;
   }
