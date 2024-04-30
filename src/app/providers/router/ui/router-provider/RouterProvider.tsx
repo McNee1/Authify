@@ -1,8 +1,9 @@
 import { createBrowserRouter } from 'react-router-dom';
 import { PATH_ROUTER } from '../../lib/path';
-import { PrivateRoute } from '../private-route/PrivateRoute';
+import { ErrorBoundaryWrap } from '../error-boundary-wrap/ErrorBoundaryWrap';
 
 import { LoginPage } from '@/pages/login-page';
+import { NotFoundPage } from '@/pages/not-found-page/NotFoundPage';
 import { ProfilePage } from '@/pages/profile-page';
 import { RegistrationPage } from '@/pages/registration-page';
 import { UsersPage } from '@/pages/users-page';
@@ -13,7 +14,11 @@ import { MainLayout } from '@/widgets/layouts/main-layout';
 export const useRouter = () => {
   const router = createBrowserRouter([
     {
-      element: <AuthLayout />,
+      element: (
+        <ErrorBoundaryWrap>
+          <AuthLayout />
+        </ErrorBoundaryWrap>
+      ),
 
       children: [
         {
@@ -28,10 +33,11 @@ export const useRouter = () => {
     },
     {
       element: (
-        <PrivateRoute redirect='login'>
+        <ErrorBoundaryWrap isPrivate>
           <MainLayout />
-        </PrivateRoute>
+        </ErrorBoundaryWrap>
       ),
+
       children: [
         {
           path: '/',
@@ -46,6 +52,10 @@ export const useRouter = () => {
           element: <ProfilePage rule='guest' />,
         },
       ],
+    },
+    {
+      element: <NotFoundPage />,
+      path: '*',
     },
   ]);
 
