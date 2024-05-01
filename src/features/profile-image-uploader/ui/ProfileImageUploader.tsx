@@ -3,7 +3,9 @@ import { useAddImage } from '../model/hooks/use-add-image';
 import { useDeleteImage } from '../model/hooks/use-delete-image';
 import { useFetchImage } from '../model/hooks/use-fetch-image';
 
+import arrowIcon from '/src/shared/assets/icons/arrow.svg';
 import pictureIcon from '/src/shared/assets/icons/picture.svg';
+import trashCanIcon from '/src/shared/assets/icons/trashCan.svg';
 import { useAppSelector } from '@/app/providers/store-provider';
 import { selectAccessToken } from '@/features/session';
 import { Rule } from '@/pages/profile-page';
@@ -36,13 +38,13 @@ export const ProfileImageUploader = ({ uId, rule }: ProfileImageUploaderProps) =
               className='flex cursor-pointer gap-2 px-5 py-1'
               onClick={handleDeleteImage}
             >
-              <SVG src='/src/shared/assets/icons/trashCan.svg' />
+              <SVG src={trashCanIcon} />
               <span className='text-base font-medium text-black'>Удалить</span>
               <SVG src={pictureIcon} />
             </Button>
           ) : (
             <label className='flex cursor-pointer  gap-2 px-5 py-1'>
-              <SVG src='/src/shared/assets/icons/arrow.svg' />
+              <SVG src={arrowIcon} />
               <span className='text-base font-medium text-black'>Загрузить</span>
               <SVG src={pictureIcon} />
 

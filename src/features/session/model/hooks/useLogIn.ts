@@ -3,6 +3,7 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { loginSchema, LoginSchemaType } from '../schema/login';
+import { selectIsAuth } from '../selectors/select-is-auth';
 import { selectSessionStatus } from '../selectors/select-session-status';
 import { loginUserThank } from '../service/login-user';
 
@@ -25,6 +26,7 @@ export const useLogIn = () => {
 
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const isAuth = useAppSelector(selectIsAuth);
 
   const status = useAppSelector(selectSessionStatus);
 
@@ -38,10 +40,10 @@ export const useLogIn = () => {
   };
 
   useEffect(() => {
-    if (status === 'succeeded') {
+    if (status === 'succeeded' && isAuth) {
       navigate(`/${PATH_ROUTER.PROFILE}`);
     }
-  }, [navigate, status]);
+  }, [isAuth, navigate, status]);
 
   return { control, errors, handleSubmit, onSubmit, Controller, status };
 };

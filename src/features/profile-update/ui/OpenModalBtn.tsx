@@ -1,5 +1,6 @@
 import SVG from 'react-inlinesvg';
 
+import pencilIcon from '/src/shared/assets/icons/pencil.svg';
 import { Button } from '@/shared/ui/button/Button';
 
 export const OpenModalBtn = ({ onOpenModal }: { onOpenModal: () => void }) => {
@@ -9,8 +10,8 @@ export const OpenModalBtn = ({ onOpenModal }: { onOpenModal: () => void }) => {
       onClick={onOpenModal}
     >
       <SVG
-        src='/src/shared/assets/icons/pencil.svg'
         className='mr-2.5'
+        src={pencilIcon}
       />
       <span className='font-medium'>Редактировать</span>
     </Button>

@@ -1,6 +1,7 @@
 import SVG from 'react-inlinesvg';
 import { useLogout } from '../../model/hooks/useLogout';
 
+import exitIcon from '/src/shared/assets/icons/exit.svg';
 import { Button } from '@/shared/ui/button/Button';
 
 export const Logout = () => {
@@ -11,8 +12,8 @@ export const Logout = () => {
       onClick={handleLogout}
     >
       <SVG
-        src='/src/shared/assets/icons/exit.svg'
         className='mr-2.5'
+        src={exitIcon}
       />
       <span className='font-medium'>Выйти</span>
     </Button>

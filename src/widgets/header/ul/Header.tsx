@@ -1,6 +1,7 @@
 import SVG from 'react-inlinesvg';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
+import logoIcon from '/src/shared/assets/icons/logo.svg';
 import { PATH_ROUTER } from '@/app/providers/router';
 import { useAppSelector } from '@/app/providers/store-provider';
 import { selectUserImg, selectUserName } from '@/entities/user';
@@ -17,7 +18,6 @@ export const Header = () => {
   const navigate = useNavigate();
 
   const handleEnter = () => {
-    console.log(location);
     if (location.pathname.slice(1) !== PATH_ROUTER.LOGIN) {
       navigate(PATH_ROUTER.LOGIN);
     } else {
@@ -32,7 +32,7 @@ export const Header = () => {
           <div className='flex items-center'>
             <div className='mr-[20px]'>
               <Link to={PATH_ROUTER.USERS}>
-                <SVG src='/src/shared/assets/icons/logo.svg' />
+                <SVG src={logoIcon} />
               </Link>
             </div>
             <span className='hidden w-[225px] sm:block'>
