@@ -142,14 +142,16 @@ export const ProfileUpdateModal = ({
             </div>
             <div className='flex justify-between gap-2'>
               <Button
-                className='w-full max-w-[265px] rounded-[5px] border border-zinc-500 bg-white py-3 text-base font-medium text-black'
+                className='w-full max-w-[265px] py-3'
                 onClick={onCloseModal}
+                variant='light'
                 type='button'
               >
                 Отмена
               </Button>
               <Button
-                className='w-full max-w-[265px] rounded-[5px] border border-zinc-500 bg-black py-3 text-base font-medium text-white disabled:border-neutral-300 disabled:bg-neutral-300'
+                className='max-w-[265px w-full py-3'
+                variant='dark'
                 type='submit'
               >
                 Сохранить

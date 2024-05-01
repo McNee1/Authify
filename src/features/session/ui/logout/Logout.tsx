@@ -8,8 +8,9 @@ export const Logout = () => {
   const { handleLogout } = useLogout();
   return (
     <Button
-      className='mb-4 flex flex-row items-center rounded-md border border-neutral-300 px-[21px] py-1.5 duration-100 ease-in hover:bg-zinc-200'
+      className='mb-4 flex flex-row items-center px-[21px] py-1.5'
       onClick={handleLogout}
+      variant='light'
     >
       <SVG
         className='mr-2.5'

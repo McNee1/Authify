@@ -133,8 +133,9 @@ export const CreateUser = () => {
       </div>
 
       <Button
-        className='w-full rounded-md bg-black py-[13px] font-medium text-white disabled:bg-neutral-300 disabled:text-white'
         disabled={status === 'pending'}
+        className='w-full py-[13px]'
+        variant='dark'
         type='submit'
       >
         Создать аккаунт

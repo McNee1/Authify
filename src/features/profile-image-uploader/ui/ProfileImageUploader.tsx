@@ -32,10 +32,10 @@ export const ProfileImageUploader = ({ uId, rule }: ProfileImageUploaderProps) =
       <ProfileHeroImage image={heroImage} />
 
       {rule === OWNER && !isLoadingImg && (
-        <div className='duration-100" absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-[5px] border border-neutral-300 bg-white ease-in hover:bg-zinc-200'>
+        <div className='absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-[5px] border border-neutral-300 bg-white duration-100  hover:bg-zinc-200'>
           {heroImage ? (
             <Button
-              className='flex cursor-pointer gap-2 px-5 py-1'
+              className='flex gap-2 px-5 py-1'
               onClick={handleDeleteImage}
             >
               <SVG src={trashCanIcon} />
@@ -43,7 +43,7 @@ export const ProfileImageUploader = ({ uId, rule }: ProfileImageUploaderProps) =
               <SVG src={pictureIcon} />
             </Button>
           ) : (
-            <label className='flex cursor-pointer  gap-2 px-5 py-1'>
+            <label className='flex cursor-pointer gap-2 px-5 py-1'>
               <SVG src={arrowIcon} />
               <span className='text-base font-medium text-black'>Загрузить</span>
               <SVG src={pictureIcon} />

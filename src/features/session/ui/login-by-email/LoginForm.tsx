@@ -97,8 +97,9 @@ export const LoginForm = () => {
       </div>
 
       <Button
-        className='w-full rounded-md bg-black py-[13px] font-medium text-white disabled:bg-neutral-300'
         disabled={status === 'pending'}
+        className='w-full py-[13px]'
+        variant='dark'
         type='submit'
       >
         Вход
