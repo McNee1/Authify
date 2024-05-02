@@ -9,7 +9,7 @@ import trashCanIcon from '/src/shared/assets/icons/trashCan.svg';
 import { useAppSelector } from '@/app/providers/store-provider';
 import { selectAccessToken } from '@/features/session';
 import { Rule } from '@/pages/profile-page';
-import { OWNER } from '@/shared/constant/common';
+import { RULES } from '@/shared/constant/common';
 import { Button } from '@/shared/ui/button/Button';
 import { ProfileHeroImage } from '@/shared/ui/profile-hero-image/ProfileHeroImage';
 
@@ -31,7 +31,7 @@ export const ProfileImageUploader = ({ uId, rule }: ProfileImageUploaderProps) =
     <div className='relative h-48'>
       <ProfileHeroImage image={heroImage} />
 
-      {rule === OWNER && !isLoadingImg && (
+      {rule === RULES.OWNER && !isLoadingImg && (
         <div className='absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-[5px] border border-neutral-300 bg-white duration-100  hover:bg-zinc-200'>
           {heroImage ? (
             <Button

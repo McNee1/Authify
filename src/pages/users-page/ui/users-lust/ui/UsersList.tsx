@@ -13,7 +13,7 @@ export const UsersList = ({ usersList }: UsersListProps) => {
     <div>
       {usersList?.map((user, id) => (
         <Link
-          to={{ pathname: `${PATH_ROUTER.GUEST}/${user.uId}` }}
+          to={{ pathname: `${PATH_ROUTER.PROFILE}/${user.uId}` }}
           key={id}
         >
           <div className='flex items-center border-b p-4 py-2.5 first-of-type:border-t'>

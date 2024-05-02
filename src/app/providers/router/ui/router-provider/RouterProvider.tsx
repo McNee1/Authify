@@ -7,7 +7,6 @@ import { NotFoundPage } from '@/pages/not-found-page/NotFoundPage';
 import { ProfilePage } from '@/pages/profile-page';
 import { RegistrationPage } from '@/pages/registration-page';
 import { UsersPage } from '@/pages/users-page';
-import { OWNER } from '@/shared/constant/common';
 import { AuthLayout } from '@/widgets/layouts/auth-layout';
 import { MainLayout } from '@/widgets/layouts/main-layout';
 
@@ -45,10 +44,10 @@ export const useRouter = () => {
         },
         {
           path: PATH_ROUTER.PROFILE,
-          element: <ProfilePage rule={OWNER} />,
+          element: <ProfilePage rule='owner' />,
         },
         {
-          path: `${PATH_ROUTER.GUEST}/:guestId`,
+          path: `${PATH_ROUTER.PROFILE}/:guestId`,
           element: <ProfilePage rule='guest' />,
         },
       ],

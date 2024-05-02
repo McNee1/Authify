@@ -5,12 +5,13 @@ import type { Rule } from '../types/index.type';
 import { useAppSelector } from '@/app/providers/store-provider';
 import type { User } from '@/entities/user';
 import { selectAccessToken, selectUserId } from '@/features/session';
-import { OWNER } from '@/shared/constant/common';
+import { RULES } from '@/shared/constant/common';
 import { handleResponseError } from '@/shared/lib/handle-response-error';
 import { UsersService } from '@/shared/services/users';
 
 export const useProfile = (rule: Rule) => {
   const idToken = useAppSelector(selectAccessToken);
+
   const ownerId = useAppSelector(selectUserId);
 
   const [profileData, setProfileData] = useState<User | null>(null);
@@ -21,7 +22,11 @@ export const useProfile = (rule: Rule) => {
 
   const { guestId } = useParams();
 
-  const uId = rule === OWNER ? ownerId : guestId;
+  const uId = rule === RULES.OWNER ? ownerId : guestId === ownerId ? ownerId : guestId;
+
+  const currentRule = (
+    rule === RULES.OWNER ? RULES.OWNER : guestId === ownerId ? RULES.OWNER : RULES.GUEST
+  ) as Rule;
 
   useEffect(() => {
     const usersService = new UsersService();
@@ -47,7 +52,7 @@ export const useProfile = (rule: Rule) => {
     };
 
     void fetchProfileInfo();
-  }, [guestId, idToken, rule, uId]);
+  }, [guestId, idToken, uId]);
 
-  return { profileData, isLoading, uId, error, setProfileData };
+  return { profileData, isLoading, uId, error, setProfileData, currentRule };
 };

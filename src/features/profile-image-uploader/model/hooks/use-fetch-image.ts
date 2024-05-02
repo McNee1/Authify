@@ -24,7 +24,7 @@ export const useFetchImage = (uId: uIdType, idToken: iTokenType) => {
 
         setHeroImage(imageUrl);
       } catch (error) {
-        console.error('Произошла ошибка:', error);
+        setHeroImage(null);
       } finally {
         setIsLoadingImg(false);
       }

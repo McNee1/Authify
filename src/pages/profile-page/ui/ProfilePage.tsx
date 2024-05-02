@@ -5,7 +5,7 @@ import { ProfilePageProps } from '../model/types/index.type';
 import { ProfileImageUploader } from '@/features/profile-image-uploader';
 import { OpenModalBtn, ProfileUpdateModal } from '@/features/profile-update';
 import { Logout } from '@/features/session/ui/logout/Logout';
-import { OWNER } from '@/shared/constant/common';
+import { RULES } from '@/shared/constant/common';
 import { Avatar } from '@/shared/ui/avatar/Avatar';
 import { ErrorMessage } from '@/shared/ui/error-message/ErrorMessage';
 import { Portal } from '@/shared/ui/portal/Portal';
@@ -13,7 +13,8 @@ import { Skeleton } from '@/shared/ui/skeleton/Skeleton';
 import { ProfileCard } from '@/widgets/profile-card';
 
 export const ProfilePage = ({ rule }: ProfilePageProps) => {
-  const { isLoading, profileData, setProfileData, uId, error } = useProfile(rule);
+  const { isLoading, profileData, setProfileData, uId, error, currentRule } =
+    useProfile(rule);
 
   const { handleCloseModal, handleOpenModal, handleUpdateProfile, isOpenModal } =
     useUpdateProfile(setProfileData);
@@ -28,7 +29,7 @@ export const ProfilePage = ({ rule }: ProfilePageProps) => {
   return (
     <>
       <ProfileImageUploader
-        rule={rule}
+        rule={currentRule}
         uId={uId}
       />
       <div className='container'>
@@ -41,12 +42,16 @@ export const ProfilePage = ({ rule }: ProfilePageProps) => {
           />
 
           <ProfileCard
-            editBtn={rule === OWNER && <OpenModalBtn onOpenModal={handleOpenModal} />}
+            editBtn={
+              currentRule === RULES.OWNER && (
+                <OpenModalBtn onOpenModal={handleOpenModal} />
+              )
+            }
+            logoutBtn={currentRule === RULES.OWNER && <Logout />}
             description={profileData?.description ?? null}
-            logoutBtn={rule === OWNER && <Logout />}
             userName={profileData?.name ?? null}
             email={profileData?.email ?? null}
-            rule={rule}
+            rule={currentRule}
           />
         </div>
       </div>
