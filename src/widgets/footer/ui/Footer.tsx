@@ -1,6 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
 
 import { PATH_ROUTER } from '@/app/providers/router';
+import { useResetSessionError } from '@/features/session/model/hooks/useResetSessionError';
 
 const MAP: Record<string, string> = {
   REGISTRATION: 'Уже есть аккаунт? Войти',
@@ -16,12 +17,17 @@ export const Footer = () => {
   const invertedPath =
     locationPath === PATH_ROUTER.LOGIN ? PATH_ROUTER.REGISTRATION : PATH_ROUTER.LOGIN;
 
+  const { handleResetError } = useResetSessionError();
+
   return (
     <footer>
       <div className='flex py-5'>
         <div className='m-auto py-1'>
           <span className='text-zinc-500'>{title}?</span>{' '}
           <Link
+            onClick={() => {
+              handleResetError();
+            }}
             className='font-medium'
             to={invertedPath}
           >
